@@ -17,5 +17,10 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls)
 ]
+
+# Styles Django Admin
+admin.site.site_header = "Streamhub Admin"
+admin.site.site_title = "Streamhub Admin Portal"
+admin.site.index_title = "Streamhub Data"
