@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}" >
+        <h1 style="color: white; font-weight: bold;">
+            <img src="{% static 'logo2.png' %}" style="width: 2em;" alt="Logo">
+            STREAMHUB
+        </h1>
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
