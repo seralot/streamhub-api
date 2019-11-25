@@ -23,4 +23,4 @@ urlpatterns = [
 # Styles Django Admin
 admin.site.site_header = "Streamhub Admin"
 admin.site.site_title = "Streamhub Admin Portal"
-admin.site.index_title = "Streamhub Data"
+admin.site.index_title = "Streamhub Admin"
