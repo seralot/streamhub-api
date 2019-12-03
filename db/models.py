@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Director(models.Model):
     name = models.CharField("Director", max_length=30, blank=False, null=False)
     surname = models.CharField(("Apellidos"), max_length=50)
@@ -13,6 +14,7 @@ class Director(models.Model):
     class Meta:
         verbose_name = "director"
         verbose_name_plural = "Directores"
+
 
 class Platform(models.Model):
     name = models.CharField("Nombre", max_length=20, blank=False, null=False)
@@ -30,19 +32,12 @@ class Platform(models.Model):
 
 
 class Content(models.Model):
-    MOVIE = 'Pelicula'
-    SERIE = 'Serie'
-    DOCUMENTAL = 'Documental'
-    TYPE_CHOICES = [
-        (MOVIE, 'Pelicula'),
-        (SERIE, 'Serie'),
-        (DOCUMENTAL, 'Documental')
-    ]
+    MOVIE = "Pelicula"
+    SERIE = "Serie"
+    DOCUMENTAL = "Documental"
+    TYPE_CHOICES = [(MOVIE, "Pelicula"), (SERIE, "Serie"), (DOCUMENTAL, "Documental")]
     typeContent = models.CharField(
-        "Tipo",
-        max_length=12,
-        choices=TYPE_CHOICES,
-        default=MOVIE,
+        "Tipo", max_length=12, choices=TYPE_CHOICES, default=MOVIE
     )
     title = models.CharField("Titulo", max_length=50, blank=False, null=False)
     release = models.DateField("Estreno", blank=False, null=False)
@@ -68,7 +63,6 @@ class PlatformContent(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     num_seasons = models.IntegerField("Temporadas", blank=True, null=True)
     num_episodes = models.IntegerField("Capitulos", blank=True, null=True)
-
 
     def __str__(self):
         return f"{self.platform} {self.content}"

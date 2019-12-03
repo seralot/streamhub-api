@@ -38,21 +38,28 @@ class ContentAdmin(admin.ModelAdmin):
         "release",
         "runtime",
         "director",
-        'genre',
+        "genre",
         "imdbRating",
         "typeContent",
     )
     list_filter = ("typeContent",)
 
+
 @admin.register(models.PlatformContent)
 class PlatformContentAdmin(admin.ModelAdmin):
-    list_display = ("platform", "title", "release", 'runtime', 'imdbRating', 'typeContent')
+    list_display = (
+        "platform",
+        "title",
+        "release",
+        "runtime",
+        "imdbRating",
+        "typeContent",
+    )
     list_filter = ("platform",)
 
     @admin_display(short_description="Titulo")
     def title(self, obj):
         return obj.content.title
-
 
     @admin_display(short_description="Estreno")
     def release(self, obj):
@@ -73,9 +80,9 @@ class PlatformContentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Platform)
 class PlatformAdmin(admin.ModelAdmin):
-    list_display = ('name', 'pricePremium', 'priceStandard', 'priceBasic', 'content4k')
+    list_display = ("name", "pricePremium", "priceStandard", "priceBasic", "content4k")
+
 
 @admin.register(models.Director)
 class DirectorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'surname')
-
+    list_display = ("name", "surname")
