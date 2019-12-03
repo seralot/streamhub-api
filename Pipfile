@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 sync = "*"
 djangorestframework = "*"
+django-heroku = "*"
 
 [dev-packages]
 black = "==19.3b0"
