@@ -8,6 +8,8 @@ django = "*"
 sync = "*"
 djangorestframework = "*"
 django-heroku = "*"
+django-cors-headers = "*"
+gunicorn = "*"
 
 [dev-packages]
 black = "==19.3b0"
