@@ -6,88 +6,123 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('db', '0001_initial'),
-    ]
+    dependencies = [("db", "0001_initial")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='content',
-            name='platform',
-        ),
-        migrations.RemoveField(
-            model_name='platform',
-            name='price',
-        ),
+        migrations.RemoveField(model_name="content", name="platform"),
+        migrations.RemoveField(model_name="platform", name="price"),
         migrations.AddField(
-            model_name='content',
-            name='genre',
-            field=models.TextField(default='action', max_length=40, verbose_name='Genero'),
+            model_name="content",
+            name="genre",
+            field=models.TextField(
+                default="action", max_length=40, verbose_name="Genero"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='director',
-            name='photo',
-            field=models.CharField(default='img', max_length=150, verbose_name='Foto'),
+            model_name="director",
+            name="photo",
+            field=models.CharField(default="img", max_length=150, verbose_name="Foto"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='director',
-            name='surname',
-            field=models.CharField(default='apellido', max_length=50, verbose_name='Apellidos'),
+            model_name="director",
+            name="surname",
+            field=models.CharField(
+                default="apellido", max_length=50, verbose_name="Apellidos"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='platform',
-            name='content4k',
-            field=models.BooleanField(default=False, verbose_name='No'),
+            model_name="platform",
+            name="content4k",
+            field=models.BooleanField(default=False, verbose_name="No"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='platform',
-            name='priceBasic',
-            field=models.IntegerField(default='15', verbose_name='Basico'),
+            model_name="platform",
+            name="priceBasic",
+            field=models.IntegerField(default="15", verbose_name="Basico"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='platform',
-            name='pricePremium',
-            field=models.IntegerField(default='20', verbose_name='Premium'),
+            model_name="platform",
+            name="pricePremium",
+            field=models.IntegerField(default="20", verbose_name="Premium"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='platform',
-            name='priceStandard',
-            field=models.IntegerField(default='16', verbose_name='Estandár'),
+            model_name="platform",
+            name="priceStandard",
+            field=models.IntegerField(default="16", verbose_name="Estandár"),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='content',
-            name='episodes',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Capitulos'),
+            model_name="content",
+            name="episodes",
+            field=models.IntegerField(blank=True, null=True, verbose_name="Capitulos"),
         ),
         migrations.AlterField(
-            model_name='content',
-            name='seasons',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Temporadas'),
+            model_name="content",
+            name="seasons",
+            field=models.IntegerField(blank=True, null=True, verbose_name="Temporadas"),
         ),
         migrations.AlterField(
-            model_name='content',
-            name='typeContent',
-            field=models.CharField(choices=[('Pelicula', 'Pelicula'), ('Serie', 'Serie'), ('Documental', 'Documental')], default='Pelicula', max_length=12, verbose_name='Tipo'),
+            model_name="content",
+            name="typeContent",
+            field=models.CharField(
+                choices=[
+                    ("Pelicula", "Pelicula"),
+                    ("Serie", "Serie"),
+                    ("Documental", "Documental"),
+                ],
+                default="Pelicula",
+                max_length=12,
+                verbose_name="Tipo",
+            ),
         ),
         migrations.CreateModel(
-            name='PlatformContent',
+            name="PlatformContent",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('num_seasons', models.IntegerField(blank=True, null=True, verbose_name='Temporadas')),
-                ('num_episodes', models.IntegerField(blank=True, null=True, verbose_name='Capitulos')),
-                ('content', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.Content')),
-                ('platform', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='db.Platform')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "num_seasons",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="Temporadas"
+                    ),
+                ),
+                (
+                    "num_episodes",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="Capitulos"
+                    ),
+                ),
+                (
+                    "content",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="db.Content"
+                    ),
+                ),
+                (
+                    "platform",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="db.Platform",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Contenido Plataforma',
-                'verbose_name_plural': 'Contenido Plataformas',
+                "verbose_name": "Contenido Plataforma",
+                "verbose_name_plural": "Contenido Plataformas",
             },
         ),
     ]
