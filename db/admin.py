@@ -1,10 +1,17 @@
 from typing import Callable, Optional, TypeVar
 
+from django import forms
 from django.contrib import admin
+from django.db import models as model
+from django.forms import CheckboxSelectMultiple
 
 from . import models
-
 # Register your models here.
+
+class MyModelAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        model.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
 ReturnType = TypeVar("ReturnType")
 FuncType = Callable[..., ReturnType]
@@ -37,8 +44,6 @@ class ContentAdmin(admin.ModelAdmin):
         "title",
         "release",
         "runtime",
-        "director",
-        "genre",
         "imdbRating",
         "typeContent",
     )
@@ -80,9 +85,21 @@ class PlatformContentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Platform)
 class PlatformAdmin(admin.ModelAdmin):
-    list_display = ("name", "pricePremium", "priceStandard", "priceBasic", "content4k")
+    list_display = ("name", "pricePremium", "priceStandard", "priceBasic")
 
 
 @admin.register(models.Director)
 class DirectorAdmin(admin.ModelAdmin):
     list_display = ("name", "surname")
+
+@admin.register(models.Actor)
+class ActorAdmin(admin.ModelAdmin):
+    list_display = ("name", "surname")
+
+@admin.register(models.ActorContent)
+class ActorContent(admin.ModelAdmin):
+    list_display = ("actor", "content", "main")
+
+@admin.register(models.Genre)
+class GenreAdmin(admin.ModelAdmin):
+    list_display = ("name",)

@@ -6,7 +6,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [("db", "0001_initial")]
+    dependencies = [('db', '0001_initial')]
 
     operations = [
         migrations.RemoveField(model_name="content", name="platform"),

@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Director(models.Model):
-    name = models.CharField("Director", max_length=30, blank=False, null=False)
+    name = models.CharField("Nombre", max_length=30, blank=False, null=False)
     surname = models.CharField(("Apellidos"), max_length=50)
     photo = models.CharField(("Foto"), max_length=150)
 
@@ -15,13 +15,42 @@ class Director(models.Model):
         verbose_name = "director"
         verbose_name_plural = "Directores"
 
+class Actor(models.Model):
+    name = models.CharField("Nombre", max_length=30, blank=False, null=False)
+    surname = models.CharField(("Apellidos"), max_length=50)
+    photo = models.CharField(("Foto"), max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "actor"
+        verbose_name_plural = "Actores"
+
+class Genre(models.Model):
+    name = models.CharField("Genero", max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "genero"
+        verbose_name_plural = "Generos"
 
 class Platform(models.Model):
     name = models.CharField("Nombre", max_length=20, blank=False, null=False)
-    pricePremium = models.IntegerField("Premium")
-    priceStandard = models.IntegerField("Estandár")
-    priceBasic = models.IntegerField("Basico")
-    content4k = models.BooleanField("4K")
+    pricePremium = models.IntegerField("Precio Premium")
+    priceStandard = models.IntegerField("Precio Estandár")
+    priceBasic = models.IntegerField("Precio Basico")
+    resolutionPremium = models.CharField("Resolución Premium", max_length=20)
+    resolutionStandard = models.CharField("Resolución Estandár", max_length=20)
+    resolutionBasic = models.CharField("Resolución Basico", max_length=20)
+    devicesPremium = models.IntegerField("Dispositivos Premium")
+    devicesStandard = models.IntegerField("Dispositivos Estandár")
+    devicesBasic = models.IntegerField("Dispositivos Basico")
+    profiles = models.IntegerField("Perfiles")
+    parentalControl = models.BooleanField("Control Parental")
+    noConnection = models.BooleanField("Sin Conexión")
 
     def __str__(self):
         return self.name
@@ -42,13 +71,14 @@ class Content(models.Model):
     title = models.CharField("Titulo", max_length=50, blank=False, null=False)
     release = models.DateField("Estreno", blank=False, null=False)
     runtime = models.IntegerField("Duración")
-    genre = models.TextField("Genero", max_length=40)
     episodes = models.IntegerField("Capitulos", blank=True, null=True)
     seasons = models.IntegerField("Temporadas", blank=True, null=True)
     description = models.TextField("Descripción")
     poster = models.CharField("Poster", max_length=150)
+    trailer = models.CharField("Trailer", max_length=150)
     imdbRating = models.CharField("IMDB", max_length=6)
-    director = models.ForeignKey(Director, on_delete=models.CASCADE)
+    director = models.ManyToManyField(Director)
+    genre = models.ManyToManyField(Genre, verbose_name='Genero',)
 
     def __str__(self):
         return f"{self.title} {self.release}"
@@ -62,7 +92,6 @@ class PlatformContent(models.Model):
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE, null=True)
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     num_seasons = models.IntegerField("Temporadas", blank=True, null=True)
-    num_episodes = models.IntegerField("Capitulos", blank=True, null=True)
 
     def __str__(self):
         return f"{self.platform} {self.content}"
@@ -70,3 +99,15 @@ class PlatformContent(models.Model):
     class Meta:
         verbose_name = "Contenido Plataforma"
         verbose_name_plural = "Contenido Plataformas"
+
+class ActorContent(models.Model):
+    actor = models.ForeignKey(Actor, on_delete=models.CASCADE, null=True)
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    main = models.BooleanField("Principal")
+
+    def __str__(self):
+        return f"{self.actor} {self.content}"
+
+    class Meta:
+        verbose_name = "actor contenido"
+        verbose_name_plural = "Actores Contenido"

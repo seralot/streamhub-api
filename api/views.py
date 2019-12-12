@@ -13,6 +13,15 @@ class DirectorViewSet(viewsets.ModelViewSet):
     queryset = models.Director.objects.all().order_by("name")
     serializer_class = serializers.DirectorSerializer
 
+class ActorViewSet(viewsets.ModelViewSet):
+
+    queryset = models.Actor.objects.all().order_by("name")
+    serializer_class = serializers.ActorSerializer
+
+class GenreViewSet(viewsets.ModelViewSet):
+
+    queryset = models.Genre.objects.all().order_by("name")
+    serializer_class = serializers.GenreSerializer
 
 class PlatformViewSet(viewsets.ModelViewSet):
 
@@ -30,3 +39,8 @@ class PlatformContentViewSet(viewsets.ModelViewSet):
 
     queryset = models.PlatformContent.objects.all()
     serializer_class = serializers.PlatformContentSerializer
+
+class ActorContentViewSet(viewsets.ModelViewSet):
+
+    queryset = models.ActorContent.objects.all()
+    serializer_class = serializers.ActorContentSerializer

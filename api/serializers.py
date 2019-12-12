@@ -9,6 +9,15 @@ class DirectorSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Director
         fields = ["name", "surname", "photo"]
 
+class ActorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.Actor
+        fields = ["name", "surname", "photo"]
+    
+class GenreSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.Genre
+        fields = ["name"]
 
 class PlatformSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -37,4 +46,9 @@ class ContentSerializer(serializers.HyperlinkedModelSerializer):
 class PlatformContentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.PlatformContent
-        fields = ["platform", "content", "num_seasons", "num_episodes"]
+        fields = ["platform", "content", "num_seasons"]
+
+class ActorContentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.ActorContent
+        fields = ["actor", "content", "main"]
