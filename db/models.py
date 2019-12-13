@@ -9,7 +9,7 @@ class Director(models.Model):
     photo = models.CharField(("Foto"), max_length=150)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} {self.surname}"
 
     class Meta:
         verbose_name = "director"
@@ -39,12 +39,12 @@ class Genre(models.Model):
 
 class Platform(models.Model):
     name = models.CharField("Nombre", max_length=20, blank=False, null=False)
-    pricePremium = models.IntegerField("Precio Premium")
-    priceStandard = models.IntegerField("Precio Estandár")
-    priceBasic = models.IntegerField("Precio Basico")
-    resolutionPremium = models.CharField("Resolución Premium", max_length=20)
-    resolutionStandard = models.CharField("Resolución Estandár", max_length=20)
-    resolutionBasic = models.CharField("Resolución Basico", max_length=20)
+    pricePremium = models.DecimalField("Precio Premium", max_digits=5, decimal_places=2)
+    priceStandard = models.DecimalField("Precio Estandár", max_digits=5, decimal_places=2)
+    priceBasic = models.DecimalField("Precio Basico", max_digits=5, decimal_places=2)
+    resolutionPremium = models.CharField("Resolución Premium", max_length=10)
+    resolutionStandard = models.CharField("Resolución Estandár", max_length=10)
+    resolutionBasic = models.CharField("Resolución Basico", max_length=10)
     devicesPremium = models.IntegerField("Dispositivos Premium")
     devicesStandard = models.IntegerField("Dispositivos Estandár")
     devicesBasic = models.IntegerField("Dispositivos Basico")
@@ -81,7 +81,7 @@ class Content(models.Model):
     genre = models.ManyToManyField(Genre, verbose_name='Genero',)
 
     def __str__(self):
-        return f"{self.title} {self.release}"
+        return f"{self.title}"
 
     class Meta:
         verbose_name = "Contenido"

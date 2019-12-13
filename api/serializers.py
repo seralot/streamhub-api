@@ -22,10 +22,26 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
 class PlatformSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Platform
-        fields = ["name", "pricePremium", "priceStandard", "priceBasic", "content4k"]
+        fields = [
+            "name", 
+            "pricePremium", 
+            "priceStandard", 
+            "priceBasic",
+            "resolutionPremium",
+            "resolutionStandard",
+            "resolutionBasic",
+            "devicesPremium",
+            "devicesStandard",
+            "devicesBasic",
+            "profiles",
+            "parentalControl",
+            "noConnection"]
 
 
 class ContentSerializer(serializers.HyperlinkedModelSerializer):
+    genre = serializers.StringRelatedField(many=True)
+    director = DirectorSerializer(many=True, read_only=True)
+    
     class Meta:
         model = models.Content
         fields = [
@@ -39,16 +55,21 @@ class ContentSerializer(serializers.HyperlinkedModelSerializer):
             "description",
             "poster",
             "imdbRating",
+            "trailer",
             "director",
         ]
 
 
 class PlatformContentSerializer(serializers.HyperlinkedModelSerializer):
+    platform = serializers.StringRelatedField()
+    content = ContentSerializer("title")
     class Meta:
         model = models.PlatformContent
         fields = ["platform", "content", "num_seasons"]
 
 class ActorContentSerializer(serializers.HyperlinkedModelSerializer):
+    actor = ActorSerializer()
+    content = serializers.StringRelatedField()
     class Meta:
         model = models.ActorContent
-        fields = ["actor", "content", "main"]
+        fields = ["content", "actor", "main"]
