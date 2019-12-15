@@ -39,6 +39,7 @@ class Genre(models.Model):
 
 class Platform(models.Model):
     name = models.CharField("Nombre", max_length=20, blank=False, null=False)
+    urlLogo = models.CharField("Logo", max_length=150)
     pricePremium = models.DecimalField("Precio Premium", max_digits=5, decimal_places=2)
     priceStandard = models.DecimalField("Precio Estandár", max_digits=5, decimal_places=2)
     priceBasic = models.DecimalField("Precio Basico", max_digits=5, decimal_places=2)
@@ -77,6 +78,7 @@ class Content(models.Model):
     poster = models.CharField("Poster", max_length=150)
     trailer = models.CharField("Trailer", max_length=150)
     imdbRating = models.CharField("IMDB", max_length=6)
+    sorting = models.CharField("Clasificación", max_length=6)
     director = models.ManyToManyField(Director)
     genre = models.ManyToManyField(Genre, verbose_name='Genero',)
 
@@ -92,6 +94,7 @@ class PlatformContent(models.Model):
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE, null=True)
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     num_seasons = models.IntegerField("Temporadas", blank=True, null=True)
+    url = models.CharField("Enlace", max_length=150)
 
     def __str__(self):
         return f"{self.platform} {self.content}"
