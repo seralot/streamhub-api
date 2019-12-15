@@ -23,7 +23,8 @@ class PlatformSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Platform
         fields = [
-            "name", 
+            "name",
+            "urlLogo", 
             "pricePremium", 
             "priceStandard", 
             "priceBasic",
@@ -65,7 +66,7 @@ class PlatformContentSerializer(serializers.HyperlinkedModelSerializer):
     content = ContentSerializer("title")
     class Meta:
         model = models.PlatformContent
-        fields = ["platform", "content", "num_seasons"]
+        fields = ["platform", "content", "url", "num_seasons"]
 
 class ActorContentSerializer(serializers.HyperlinkedModelSerializer):
     actor = ActorSerializer()
